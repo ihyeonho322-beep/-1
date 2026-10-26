@@ -1,0 +1,198 @@
+:root {
+  --bg: #eaf0ee;
+  --surface: #ffffff;
+  --ink: #16221f;
+  --muted: #5b6b67;
+  --line: #cbd8d4;
+  --accent: #0b6e5f;
+  --accent-soft: #dcefe9;
+  --mark: #ffd84a;
+  --mark-ink: #16221f;
+  --font: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #101816;
+    --surface: #18231f;
+    --ink: #e6efec;
+    --muted: #93a6a0;
+    --line: #2b3b36;
+    --accent: #5fd0b8;
+    --accent-soft: #1f3a33;
+    --mark: #8a6d00;
+    --mark-ink: #fff6d6;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-padding-top: 11rem; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  line-height: 1.7;
+  -webkit-text-size-adjust: 100%;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* 상단 검색 영역 */
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .08);
+}
+@media (prefers-color-scheme: dark) {
+  .top { background: #0d2b25; color: var(--ink); border-bottom: 1px solid var(--line); }
+}
+
+.top-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 20px 12px;
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 460px);
+  grid-template-areas:
+    "law search"
+    "law count";
+  column-gap: 28px;
+  align-items: center;
+}
+
+.law { grid-area: law; }
+.law h1 { margin: 0; font-size: 1.35rem; line-height: 1.3; letter-spacing: -0.01em; }
+.law p { margin: 2px 0 0; font-size: .85rem; opacity: .8; }
+
+.search { grid-area: search; position: relative; }
+.search input {
+  width: 100%;
+  height: 46px;
+  padding: 0 44px 0 16px;
+  font: inherit;
+  font-size: 1rem;
+  color: #16221f;
+  background: #fff;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  appearance: none;
+}
+.search input::-webkit-search-cancel-button { display: none; }
+.search input::placeholder { color: #6d7d79; }
+.search input:focus { outline: 3px solid var(--mark); outline-offset: 1px; }
+
+#clear {
+  position: absolute;
+  top: 50%; right: 6px;
+  transform: translateY(-50%);
+  width: 34px; height: 34px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #3b4b47;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+#clear:hover { background: #e3ece9; }
+#clear:focus-visible { outline: 3px solid var(--accent); }
+
+.count { grid-area: count; margin: 6px 0 0; font-size: .92rem; }
+.count strong { font-size: 1.1rem; }
+
+/* 카드 */
+main { max-width: 1200px; margin: 0 auto; padding: 24px 20px 8px; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--accent);
+  border-radius: 6px;
+  padding: 16px 20px 14px;
+}
+
+.card-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.article-no { font-size: 1.5rem; font-weight: 800; color: var(--accent); letter-spacing: -0.02em; white-space: nowrap; }
+.card-title { margin: 0; font-size: 1.05rem; font-weight: 600; }
+
+.card-body p {
+  margin: 0 0 .45em;
+  font-size: .96rem;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.card-body .line { display: flex; gap: .4em; }
+.card-body .line.item { padding-left: 1.4em; }
+.card-body .no { flex: none; color: var(--muted); }
+
+mark {
+  background: var(--mark);
+  color: var(--mark-ink);
+  border-radius: 3px;
+  padding: 0 1px;
+}
+
+/* 결과 없음 */
+.empty {
+  padding: 48px 16px;
+  text-align: center;
+  color: var(--muted);
+}
+.empty p { margin: 0 0 14px; font-size: 1.05rem; }
+.empty strong { color: var(--ink); }
+.empty button {
+  font: inherit;
+  padding: 9px 18px;
+  color: #fff;
+  background: var(--accent);
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+@media (prefers-color-scheme: dark) { .empty button { color: #0d2b25; } }
+.empty button:focus-visible { outline: 3px solid var(--mark); outline-offset: 2px; }
+
+footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px 40px;
+  color: var(--muted);
+  font-size: .82rem;
+}
+footer p { margin: 0 0 2px; }
+
+@media (max-width: 720px) {
+  html { scroll-padding-top: 12rem; }
+  .top-inner {
+    grid-template-columns: 1fr;
+    grid-template-areas: "law" "search" "count";
+    row-gap: 8px;
+  }
+  .law h1 { font-size: 1.15rem; }
+  .article-no { font-size: 1.3rem; }
+}
